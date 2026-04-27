@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getSubProfiles, createSubProfile, updateSubProfile, deleteSubProfile } from "@/lib/db";
-import type { SubProfile } from "@/lib/types";
+import type { SubProfile, Availability } from "@/lib/types";
 
 const AVAILABILITY_COLORS: Record<SubProfile["availability"], string> = {
   available: "text-emerald-400 border-emerald-800/40",
@@ -15,7 +15,7 @@ export default function SubsTab() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<SubProfile | null>(null);
   const [showForm, setShowForm] = useState(false);
-  const blank = { name: "", trade: "", phone: "", email: "", bio: "", availability: "available" as const };
+  const blank = { name: "", trade: "", phone: "", email: "", bio: "", availability: "available" as Availability };
   const [form, setForm] = useState(blank);
 
   async function load() { setSubs(await getSubProfiles()); setLoading(false); }
