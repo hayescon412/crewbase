@@ -12,7 +12,7 @@ import {
   createClientUpdate,
   getSelections, uploadSelection, deleteSelection,
 } from "@/lib/db";
-import type { Job, CrewMember, Task, Material, ChangeOrder, Invoice, Photo, Selection } from "@/lib/types";
+import type { Job, JobStatus, CrewMember, Task, Material, ChangeOrder, Invoice, Photo, Selection } from "@/lib/types";
 
 const STATUSES = ["Active", "Wrapping Up", "Complete"] as const;
 const MATERIAL_STATUSES: Material["status"][] = ["needed", "ordered", "on_site"];
@@ -44,7 +44,7 @@ export default function JobsTab() {
   const [subLinkCopied, setSubLinkCopied] = useState<string | null>(null);
   const [clientLinkCopied, setClientLinkCopied] = useState<string | null>(null);
 
-  const blankForm = { name: "", address: "", trade: "", status: "Active" as const, client_name: "", client_email: "", value: "" };
+  const blankForm = { name: "", address: "", trade: "", status: "Active" as JobStatus, client_name: "", client_email: "", value: "" };
   const [form, setForm] = useState(blankForm);
 
   async function load() {
